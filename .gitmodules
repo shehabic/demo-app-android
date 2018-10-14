@@ -1,0 +1,3 @@
+[submodule "shareable"]
+	path = shareable
+	url = git@github.com:shehabic/shareable-flutter-plugin.git
