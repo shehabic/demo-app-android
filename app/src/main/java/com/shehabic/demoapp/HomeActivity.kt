@@ -1,23 +1,34 @@
 package com.shehabic.demoapp
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
-
 import kotlinx.android.synthetic.main.activity_home.*
+import android.widget.FrameLayout
+import com.deliveryhero.pandora.helpcenterflutter.HelpCenterFlutterPlugin
+import io.flutter.view.FlutterMain
+import io.flutter.facade.Flutter
+import io.flutter.plugin.common.MethodChannel
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HelpCenterFlutterPlugin.Listener {
+    override fun onDataRequested(type: String, result: MethodChannel.Result) {
+        result.success("A nice Android app responded to $type")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        FlutterMain.startInitialization(this.applicationContext)
+        HelpCenterFlutterPlugin.registerListener(this)
+        fab.setOnClickListener {
+            val flutterView = Flutter.createView(this@HomeActivity, lifecycle, "helpcenter")
+            val layout = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+            addContentView(flutterView, layout)
         }
     }
 

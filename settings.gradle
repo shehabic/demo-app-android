@@ -1,5 +1,7 @@
 include ':app'
 setBinding(new Binding([gradle: this]))
 evaluate(
-        new File(settingsDir, "shareable/.android/include_flutter.groovy")
+        new File(settingsDir.path,
+                "fluttermediator/.android/include_flutter.groovy"
+        )
 )
