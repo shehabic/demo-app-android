@@ -6,14 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 import android.widget.FrameLayout
-import com.deliveryhero.pandora.helpcenterflutter.HelpCenterFlutterPlugin
+
 import io.flutter.view.FlutterMain
 import io.flutter.facade.Flutter
 import io.flutter.plugin.common.MethodChannel
+import com.deliveryhero.pandora.dhplugin.DhpluginPlugin
 
-class HomeActivity : AppCompatActivity(), HelpCenterFlutterPlugin.Listener {
+class HomeActivity : AppCompatActivity(), DhpluginPlugin.Listener {
     override fun onDataRequested(type: String, result: MethodChannel.Result) {
-        result.success("A nice Android app responded to $type")
+        result.success("A super nice Demo Android app responded to $type")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class HomeActivity : AppCompatActivity(), HelpCenterFlutterPlugin.Listener {
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
         FlutterMain.startInitialization(this.applicationContext)
-        HelpCenterFlutterPlugin.registerListener(this)
+        DhpluginPlugin.addListener(this)
         fab.setOnClickListener {
             val flutterView = Flutter.createView(this@HomeActivity, lifecycle, "helpcenter")
             val layout = FrameLayout.LayoutParams(
