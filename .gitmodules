@@ -1,0 +1,3 @@
+[submodule "dhmodule"]
+	path = dhmodule
+	url = git@github.com:shehabic/dhmodule.git
