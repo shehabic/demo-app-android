@@ -2,6 +2,6 @@ include ':app'
 setBinding(new Binding([gradle: this]))
 evaluate(
         new File(settingsDir.path,
-                "../../flutter/dhmodule/.android/include_flutter.groovy"
+                "dhmodule/.android/include_flutter.groovy"
         )
 )
